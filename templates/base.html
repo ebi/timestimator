@@ -6,5 +6,22 @@
         {% block content %}
             <h1>Welcome to the timestimator!</h1>
         {% endblock %}
+        {% block addForm %}
+            <form action="/add" method="post">
+                <div id="descriptonFields">
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" id="description" />
+                </div>
+                <div id="jiraFields">
+                    <label for="jira">Jira Issue:</label>
+                    <input type="text" name="jira" id="jira" />
+                </div>
+                <div id="estimatedTimeFields">
+                    <label for="estimatedTime">Estimated Time:</label>
+                    <input type="text" name="estimatedTime" id="estimatedTime" />
+                </div>
+                <input type="submit" />
+            </form>
+        {% endblock %}
     </body>
 </html>
