@@ -1,6 +1,9 @@
-class add(object):
+import locale
+import re
+
+class Add(object):
     error = False
-    message = 'Added new task estimation'
+    message = ''
     knownJira = {
         'LCL': 'https://jira.local.ch/browse/'
     }
@@ -8,13 +11,20 @@ class add(object):
     def process(self, request):
         description = request.get('description')
         estimatedTime = locale.atof(request.get('estimatedTime'))
-        print estimatedTime
+        jira = request.get('jira')
+        
         if '' == description:
             self.error = True
-            self.message = 'Description is mandatory.'
+            self.message += 'Description is mandatory. '
         if estimatedTime <= 0:
             self.error = True
-            self.message = 'Estimated time must be a number.'
+            self.message += 'Estimated time must be a number. '
+        if None == re.match('[A-Z]{3}-\d*', jira):
+            self.error = True 
+            self.message += 'Not a valid jira isssue. '
+            
+        if False == self.error:
+            self.message += 'Created new task estimation'
         
         return {
             'error': self.error,

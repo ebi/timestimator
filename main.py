@@ -8,6 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
+from commands import *
 
 class MainHandler(webapp.RequestHandler):
     "Verify request and authentication call the appropriate template"
@@ -16,7 +17,7 @@ class MainHandler(webapp.RequestHandler):
     }
     
     postUrl = {
-        '/add': {'template':'add.html','command':'add'},
+        '/add': {'template':'add.html','command':Add},
     }
 
     def render(self, urlMap):
@@ -24,9 +25,7 @@ class MainHandler(webapp.RequestHandler):
             route = urlMap[self.request.path]
             
             if 'command' in route:
-                commandPath = os.path.join(os.path.dirname(__file__), 'commands', route['command'] + '.py')
-                execfile(commandPath)
-                command = locals().get(route['command'])()
+                command = route['command']()
                 templateVars = command.process(self.request)
             else:
                 templateVars = {}
