@@ -10,10 +10,12 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from commands import *
 
-templateVars = {
-    'user':users.get_current_user(),
-    'logout':users.create_logout_url('/'),
-}
+
+def getBaseTemplateVars():
+    return {
+        'user':users.get_current_user(),
+        'logout':users.create_logout_url('/'),
+    }
 
 class MainHandler(webapp.RequestHandler):
     "Verify request and authentication call the appropriate template"
@@ -28,6 +30,7 @@ class MainHandler(webapp.RequestHandler):
     def render(self, urlMap):
         if self.request.path in urlMap:
             route = urlMap[self.request.path]
+            templateVars = getBaseTemplateVars()
             for command in route['commands']:
                 commandName = command.__name__.lower()
                 command = command()
@@ -49,18 +52,21 @@ class MainHandler(webapp.RequestHandler):
 class DetailTaskHandler(webapp.RequestHandler):
     def get(self, taskKey):
         detail = Detail()
+        templateVars = getBaseTemplateVars()
         templateVars['detail'] = detail.process(self.request, taskKey)
         path = os.path.join(os.path.dirname(__file__), 'templates/detail.html')
         self.response.out.write(template.render(path, templateVars))
+    
     def post(self, taskKey):
-        self.redirect('/')
-
+        self.get(taskKey)
+    
 
 class AddEstimationHandler(webapp.RequestHandler):
     def get(self, taskKey):
         self.redirect('/')
     
     def post(self, taskKey):
+        templateVars = getBaseTemplateVars()
         add = Add()
         templateVars['add'] = add.process(self.request, taskKey)
         list = List()

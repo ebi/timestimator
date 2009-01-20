@@ -10,6 +10,22 @@
     <p><a href="/">Homepage</a>.</p>
 {% else %}
     <h1>Details for {{ detail.task.description }}</h1>
+    <dl>
+        <dt>Description</dt>
+        <dd>{{ detail.task.description }}</dd>
+        <dt>Creation</dt>
+        <dd>{{ detail.task.creation }}</dd>
+        <dt>Task Time</dt>
+        <dd>
+            {% if detail.task.time %}
+                {{ detail.task.time }}
+            {% else %}
+                <form action="/detail/{{ detail.task.key }}" method="POST">
+                    <input type="text" name="time" size="4" />
+                </form>
+            {% endif %}
+        </dd>
+    </dl>
 {% endif %}
 {% endblock %}
 
