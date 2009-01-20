@@ -3,10 +3,12 @@
         <title>timestimator: {% block title %}welcome{% endblock %}</title>
     </head>
     <body>
+        {% block message %}{% endblock %}
         {% block content %}
             <h1>Welcome to the timestimator!</h1>
         {% endblock %}
         {% block addForm %}
+            <h2>Add time estimation</h2>
             <form action="/add" method="post">
                 <div id="descriptonFields">
                     <label for="description">Description:</label>

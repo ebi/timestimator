@@ -1,14 +1,15 @@
 from google.appengine.ext import db
+from google.appengine.api import users
 
 class DisplayTask():
-    description = ''
-    jira = ''
-    jiraLink = ''
-    owner = ''
-    time = 0
-    yourEstimation = 0
-    averageEstimation = 0
-    difference = 0
+    description = None
+    jira = None
+    jiraLink = None
+    owner = None
+    time = None
+    yourEstimation = None
+    averageEstimation = None
+    difference = None
 
 class List(object):
     knownJira = {
@@ -34,10 +35,10 @@ class List(object):
             for estimation in task.estimation_set:
                 estimationsCount += 1
                 estimationTime += estimation.time
-                if estimation.owner == task.owner:
+                if estimation.owner == users.get_current_user():
                     displayTask.yourEstimation = estimation.time
             displayTask.averageEstimation = estimationTime / estimationsCount
-            if displayTask.yourEstimation > 0 and displayTask.time > 0:
+            if (displayTask.yourEstimation > 0) and (None != displayTask.time):
                 displayTask.difference = (displayTask.time - displayTask.yourEstimation) / displayTask.yourEstimation * 100
             returnTasks.append(displayTask)
         return {

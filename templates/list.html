@@ -27,9 +27,9 @@
                     {% endif %}
                 {% endif %}</td>
                 <td>{{ task.owner }}</td>
-                <td>{{ task.time }}</td>
-                <td>{{ task.yourEstimation }}</td>
-                <td>{{ task.difference }}%</td>
+                <td>{% if task.time %}{{ task.time }}{% else %}-{% endif %}</td>
+                <td>{% if task.yourEstimation %}{{ task.yourEstimation }}{% else %}-{% endif %}</td>
+                <td>{% if task.difference %}{{ task.difference }}%{% else %} - {% endif %}</td>
                 <td>{{ task.averageEstimation }}</td>
             </tr>
         {% endfor %}
