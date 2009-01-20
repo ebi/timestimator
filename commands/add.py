@@ -31,11 +31,12 @@ class Add(object):
             if '' != jira:
                 task.jira = cgi.escape(jira)
             task.put()
-            return task.key()
+            self.message += 'Created new task. '
+            return task
         else:
             return False
     
-    def createEstimation(self, taskKey):
+    def createEstimation(self, task):
         # Must be a proper number
         estimatedTime = locale.atof(self.request.get('estimatedTime'))
         if estimatedTime <= 0:
@@ -43,17 +44,24 @@ class Add(object):
             self.message += 'Estimated time must be a number. '
         
         estimation = Estimation()
-        estimation.taskId = taskKey
+        estimation.taskId = task
         estimation.owner = users.get_current_user()
         estimation.time = estimatedTime
         estimation.put()
-        self.message += 'Created new task estimation'
+        self.message += 'Created new estimation. '
     
     def process(self, request, taskKey=None):
         self.request = request
         if None == taskKey:
-            taskKey = self.createTask()
-        self.createEstimation(taskKey)
+            task = self.createTask()
+        else:
+            task = db.get(taskKey)
+        
+        if not task:
+            self.error = True
+            self.message += 'Could not get or create task. '
+        else:
+            self.createEstimation(task)
         
         # Everything worked out
         return {

@@ -21,14 +21,20 @@
                 <td>{{ task.description }}</td>
                 <td>{% if task.jira %}
                     {% if task.jiraLink %}
-                        <a href="{{ task.jiraLink }}">{{ task.jira }}</a>
+                        <a href="{{ task.jiraLink }}{{ task.jira }}">{{ task.jira }}</a>
                     {% else %}
                         {{ task.jira }}
                     {% endif %}
                 {% endif %}</td>
                 <td>{{ task.owner }}</td>
                 <td>{% if task.time %}{{ task.time }}{% else %}-{% endif %}</td>
-                <td>{% if task.yourEstimation %}{{ task.yourEstimation }}{% else %}-{% endif %}</td>
+                <td>{% if task.yourEstimation %}
+                        {{ task.yourEstimation }}
+                    {% else %}
+                    <form method="post" action="/add/{{ task.key }}">
+                        <input type="text" size="4" name="estimatedTime"/>
+                    </form>
+                {% endif %}</td>
                 <td>{% if task.difference %}{{ task.difference }}%{% else %} - {% endif %}</td>
                 <td>{{ task.averageEstimation }}</td>
             </tr>

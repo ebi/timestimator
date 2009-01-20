@@ -2,6 +2,7 @@ from google.appengine.ext import db
 from google.appengine.api import users
 
 class DisplayTask():
+    key = None
     description = None
     jira = None
     jiraLink = None
@@ -21,6 +22,7 @@ class List(object):
         tasks = db.GqlQuery("SELECT * FROM Task ORDER BY creation DESC")
         for task in tasks:
             displayTask = DisplayTask()
+            displayTask.key = task.key()
             displayTask.owner = task.owner.nickname
             displayTask.description = task.description
             displayTask.time = task.time
