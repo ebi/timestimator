@@ -17,9 +17,14 @@ class Add(object):
         if '' == description:
             self.error = True
             self.message += 'Description is mandatory. '
+        else:
+            unique = db.GqlQuery("SELECT * FROM Task WHERE description = :1", description)
+            if unique.count() > 0:
+                self.error = True
+                self.message += 'Task already exists. '
 
         # jira issues look like LCL-1234
-        if '' != jira and None == re.match('[A-Z]{3}-\d*', jira):
+        if '' != jira and None == re.match('^[A-Z]{3}-\d+$', jira):
             self.error = True 
             self.message += 'Not a valid jira isssue. '
 
@@ -37,11 +42,25 @@ class Add(object):
             return False
     
     def createEstimation(self, task):
+        unique = db.GqlQuery("SELECT * FROM Estimation WHERE taskId = :task AND owner = :user", task=task, user=users.get_current_user())
+        if unique.count() > 0:
+            self.error = True
+            self.message += 'Estimation already exists. '
+            return False
+        
+        
         # Must be a proper number
-        estimatedTime = locale.atof(self.request.get('estimatedTime'))
-        if estimatedTime <= 0:
+        estimatedTime = self.request.get('estimatedTime')
+        if re.match('^\d+\.?\d*$', estimatedTime):
+            estimatedTime = locale.atof(estimatedTime)
+            if estimatedTime <= 0:
+                self.error = True
+                self.message += 'Estimated time must be positive. '
+                return False
+        else:
             self.error = True
             self.message += 'Estimated time must be a number. '
+            return False
         
         estimation = Estimation()
         estimation.taskId = task
@@ -49,6 +68,7 @@ class Add(object):
         estimation.time = estimatedTime
         estimation.put()
         self.message += 'Created new estimation. '
+        return True
     
     def process(self, request, taskKey=None):
         self.request = request

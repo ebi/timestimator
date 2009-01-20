@@ -39,9 +39,10 @@ class List(object):
                 estimationTime += estimation.time
                 if estimation.owner == users.get_current_user():
                     displayTask.yourEstimation = estimation.time
-            displayTask.averageEstimation = estimationTime / estimationsCount
-            if (displayTask.yourEstimation > 0) and (None != displayTask.time):
-                displayTask.difference = (displayTask.time - displayTask.yourEstimation) / displayTask.yourEstimation * 100
+            if estimationsCount > 0:
+                displayTask.averageEstimation = estimationTime / estimationsCount
+                if (displayTask.yourEstimation > 0) and (None != displayTask.time):
+                    displayTask.difference = (displayTask.time - displayTask.yourEstimation) / displayTask.yourEstimation * 100
             returnTasks.append(displayTask)
         return {
             'tasks': returnTasks,
