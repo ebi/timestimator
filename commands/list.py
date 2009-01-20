@@ -42,7 +42,7 @@ class List(object):
             if estimationsCount > 0:
                 displayTask.averageEstimation = estimationTime / estimationsCount
                 if (displayTask.yourEstimation > 0) and (None != displayTask.time):
-                    displayTask.difference = (displayTask.time - displayTask.yourEstimation) / displayTask.yourEstimation * 100
+                    displayTask.difference = round(displayTask.yourEstimation / (displayTask.time/100) - 100, 1)
             returnTasks.append(displayTask)
         return {
             'tasks': returnTasks,
