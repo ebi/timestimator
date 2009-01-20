@@ -47,6 +47,9 @@ class MainHandler(webapp.RequestHandler):
     
 
 class AddEstimationHandler(webapp.RequestHandler):
+    def get(self, taskKey):
+        self.redirect('/')
+    
     def post(self, taskKey):
         add = Add()
         templateVars['add'] = add.process(self.request, taskKey)

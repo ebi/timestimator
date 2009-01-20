@@ -39,6 +39,8 @@ class Add(object):
             self.message += 'Created new task. '
             return task
         else:
+            self.error = True
+            self.message += 'Could not create task. '
             return False
     
     def createEstimation(self, task):
@@ -75,12 +77,13 @@ class Add(object):
         if None == taskKey:
             task = self.createTask()
         else:
-            task = db.get(taskKey)
+            try:
+                task = db.get(taskKey)
+            except:
+                self.error = True
+                self.message += 'Could not get task. '
         
-        if not task:
-            self.error = True
-            self.message += 'Could not get or create task. '
-        else:
+        if False == self.error:
             self.createEstimation(task)
         
         # Everything worked out
