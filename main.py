@@ -46,6 +46,16 @@ class MainHandler(webapp.RequestHandler):
         self.render(self.postUrl)
     
 
+class DetailTaskHandler(webapp.RequestHandler):
+    def get(self, taskKey):
+        detail = Detail()
+        templateVars['detail'] = detail.process(self.request, taskKey)
+        path = os.path.join(os.path.dirname(__file__), 'templates/detail.html')
+        self.response.out.write(template.render(path, templateVars))
+    def post(self, taskKey):
+        self.redirect('/')
+
+
 class AddEstimationHandler(webapp.RequestHandler):
     def get(self, taskKey):
         self.redirect('/')
@@ -61,6 +71,7 @@ class AddEstimationHandler(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
                                      [(r'/add/(.*)', AddEstimationHandler),
+                                      (r'/detail/(.*)', DetailTaskHandler),
                                       (r'.*', MainHandler),
                                      ],
                                      debug=True)

@@ -18,7 +18,13 @@
         </tr>
         {% for task in list.tasks %}
             <tr class="{% cycle row1,row2 %}">
-                <td>{{ task.description }}</td>
+                <td>
+                    {% ifequal task.owner user.nickname %}
+                        <a href="/detail/{{ task.key }}">{{ task.description }}</a>
+                    {% else %}
+                        {{ task.description }}
+                    {% endifequal %}
+                </td>
                 <td>{% if task.jira %}
                     {% if task.jiraLink %}
                         <a href="{{ task.jiraLink }}{{ task.jira }}">{{ task.jira }}</a>
@@ -27,7 +33,11 @@
                     {% endif %}
                 {% endif %}</td>
                 <td>{{ task.owner }}</td>
-                <td>{% if task.time %}{{ task.time }}{% else %}-{% endif %}</td>
+                <td>
+                    {% if task.time %}
+                        {{ task.time }}
+                    {% else %}-{% endif %}
+                </td>
                 <td>{% if task.yourEstimation %}
                         {{ task.yourEstimation }}
                     {% else %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block message %}
+    <p class="{% if detail.error %}error{% else %}success{% endif %}">{{ detail.message }}</p>
+{% endblock %}
+
+{% block content %}
+{% if detail.error %}
+    <h1>Error Occured</h1>
+    <p><a href="/">Homepage</a>.</p>
+{% else %}
+    <h1>Details for {{ detail.task.description }}</h1>
+{% endif %}
+{% endblock %}
+
+{% block addForm %}{% endblock %}
