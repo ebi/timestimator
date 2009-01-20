@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block message %}
+    <h1>Welcome to timestimator!</h1>
+{% endblock %}
+
+{% block content %}
+    <h2>Recent time estimations</h2>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Jira</th>
+            <th>Owner</th>
+            <th>Time Taken</th>
+            <th>Your Est</th>
+            <th>Diff</th>
+            <th>Avg Est</th>
+        </tr>
+        {% for task in list.tasks %}
+            <tr class="{% cycle row1,row2 %}">
+                <td>{{ task.description }}</td>
+                <td>{% if task.jira %}
+                    {% if task.jiraLink %}
+                        <a href="{{ task.jiraLink }}">{{ task.jira }}</a>
+                    {% else %}
+                        {{ task.jira }}
+                    {% endif %}
+                {% endif %}</td>
+                <td>{{ task.owner }}</td>
+                <td>{{ task.time }}</td>
+                <td>{{ task.yourEstimation }}</td>
+                <td>{{ task.difference }}%</td>
+                <td>{{ task.averageEstimation }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
