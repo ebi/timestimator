@@ -24,10 +24,10 @@ class List(object):
             displayTask.owner = task.owner.nickname
             displayTask.description = task.description
             displayTask.time = task.time
-            if '' != task.jira:
+            if None != task.jira:
                 displayTask.jira = task.jira
-                if task.jira[3] in self.knownJira:
-                    displayTask.jiraLink = self.knownJira[task.jira[3]]
+                if task.jira[:3] in self.knownJira:
+                    displayTask.jiraLink = self.knownJira[task.jira[:3]]
             
             # Now do the calculations...
             estimationsCount = 0

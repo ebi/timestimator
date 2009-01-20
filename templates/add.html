@@ -1,5 +1,5 @@
 {% extends 'list.html' %}
 
 {% block message %}
-    <p class="{% if error %}error{% else %}success{% endif %}">{{ message }}</p>
+    <p class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</p>
 {% endblock %}
