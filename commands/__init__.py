@@ -1,3 +1,1 @@
-from add import *
-from list import *
-from detail import *
+__all__ = ['add', 'detail', 'overview']

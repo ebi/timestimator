@@ -4,6 +4,8 @@ import locale
 from google.appengine.api import users
 from google.appengine.ext import db
 
+__all__ = ['Detail']
+
 class Detail(object):
     error = False
     message = ''

@@ -8,7 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
-from commands import *
+from commands import add, detail, overview
 
 
 def getBaseTemplateVars():
@@ -20,11 +20,11 @@ def getBaseTemplateVars():
 class MainHandler(webapp.RequestHandler):
     "Verify request and authentication call the appropriate template"
     getUrl = {
-        '/': {'template':'list.html','commands':[List]},
+        '/': {'template':'overview.html','commands':[overview.List]},
     }
     
     postUrl = {
-        '/add': {'template':'add.html','commands':[Add,List]},
+        '/add': {'template':'add.html','commands':[add.Add,overview.List]},
     }
     
     def render(self, urlMap):
@@ -51,9 +51,9 @@ class MainHandler(webapp.RequestHandler):
 
 class DetailTaskHandler(webapp.RequestHandler):
     def get(self, taskKey):
-        detail = Detail()
+        details = detail.Detail()
         templateVars = getBaseTemplateVars()
-        templateVars['detail'] = detail.process(self.request, taskKey)
+        templateVars['detail'] = details.process(self.request, taskKey)
         path = os.path.join(os.path.dirname(__file__), 'templates/detail.html')
         self.response.out.write(template.render(path, templateVars))
     
@@ -67,10 +67,10 @@ class AddEstimationHandler(webapp.RequestHandler):
     
     def post(self, taskKey):
         templateVars = getBaseTemplateVars()
-        add = Add()
+        add = add.Add()
         templateVars['add'] = add.process(self.request, taskKey)
-        list = List()
-        templateVars['list'] = list.process(self.request)
+        list = overview.List()
+        templateVars['list'] = overview.process(self.request)
         path = os.path.join(os.path.dirname(__file__), 'templates/add.html')
         self.response.out.write(template.render(path, templateVars))
     

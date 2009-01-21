@@ -1,6 +1,8 @@
 from google.appengine.ext import db
 from google.appengine.api import users
 
+__all__ = ['List']
+
 class DisplayTask():
     key = None
     description = None

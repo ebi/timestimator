@@ -4,6 +4,8 @@ import cgi
 from google.appengine.ext import db
 from google.appengine.api import users
 
+__all__ = ['Add']
+
 class Add(object):
     error = False
     message = ''
