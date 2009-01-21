@@ -8,7 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
-from commands import add, detail, overview
+from modules import add, detail, overview
 
 
 def getBaseTemplateVars():
@@ -67,10 +67,10 @@ class AddEstimationHandler(webapp.RequestHandler):
     
     def post(self, taskKey):
         templateVars = getBaseTemplateVars()
-        add = add.Add()
-        templateVars['add'] = add.process(self.request, taskKey)
+        adder = add.Add()
+        templateVars['add'] = adder.process(self.request, taskKey)
         list = overview.List()
-        templateVars['list'] = overview.process(self.request)
+        templateVars['list'] = list.process(self.request)
         path = os.path.join(os.path.dirname(__file__), 'templates/add.html')
         self.response.out.write(template.render(path, templateVars))
     
