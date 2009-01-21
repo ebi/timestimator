@@ -9,7 +9,8 @@
     <h1>Error Occured</h1>
     <p><a href="/">Homepage</a>.</p>
 {% else %}
-    <h1>Details for {{ detail.task.description }}</h1>
+    <h1>Details</h1>
+    <h2>{{ detail.task.description }}</h2>
     <dl>
         <dt>Description</dt>
         <dd>{{ detail.task.description }}</dd>
@@ -26,7 +27,21 @@
             {% endif %}
         </dd>
     </dl>
+    <h2>Different estimations</h2>
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Time</th>
+        </tr>
+        {% for estimation in detail.estimations %}
+            <tr>
+                <td>{{estimation.owner}}</td>
+                <td>{{estimation.time}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endif %}
+<a href="/">Homepage</a>
 {% endblock %}
 
 {% block addForm %}{% endblock %}
