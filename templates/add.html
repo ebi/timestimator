@@ -1,5 +1,5 @@
 {% extends 'overview.html' %}
 
 {% block message %}
-    <p class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</p>
+    <div class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</div>
 {% endblock %}

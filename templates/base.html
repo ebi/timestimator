@@ -2,11 +2,13 @@
     <head>
         <title>timestimator: {% block title %}welcome{% endblock %}</title>
         <link rel="icon" type="image/icon" href="/favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.0.0pr2/build/cssreset/reset-min.css"/>
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.0.0pr2/build/cssfonts/fonts-min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.0.0pr2/build/cssreset/reset-min.css" /> 
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.0.0pr2/build/cssfonts/fonts-min.css" /> 
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.0.0pr2/build/cssgrids/grids.css" />
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.0.0pr2/build/cssbase/base-min.css" />
         <link rel="stylesheet" type="text/css" href="/css/default.css" />
     </head>
-    <body>
+    <body class="yui-d1">
         {% block message %}{% endblock %}
         {% block content %}
             <h1>Welcome to the timestimator!</h1>
@@ -20,11 +22,11 @@
                 </div>
                 <div id="jiraFields" class="fieldset">
                     <label for="jira">Jira Issue:</label>
-                    <input type="text" size="8" name="jira" id="jira" />
+                    <input type="text" name="jira" id="jira" />
                 </div>
                 <div id="estimatedTimeFields" class="fieldset">
                     <label for="estimatedTime">Est Time:</label>
-                    <input type="text" size="4" name="estimatedTime" id="estimatedTime" />
+                    <input type="text" name="estimatedTime" id="estimatedTime" />
                 </div>
                 <div id="addEstimationSubmit" class="fieldset">
                     <br />

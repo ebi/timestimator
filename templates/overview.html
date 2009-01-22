@@ -38,7 +38,7 @@
                         {{ task.yourEstimation }}
                     {% else %}
                     <form method="post" action="/add/{{ task.key }}">
-                        <input type="text" size="4" name="estimatedTime"/>
+                        <input type="text" name="estimatedTime"/>
                     </form>
                 {% endif %}</td>
                 <td>{% if task.difference %}{{ task.difference }}%{% else %} - {% endif %}</td>
