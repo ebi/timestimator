@@ -19,11 +19,7 @@
         {% for task in list.tasks %}
             <tr class="{% cycle row1,row2 %}">
                 <td>
-                    {% ifequal task.owner user.nickname %}
-                        <a href="/detail/{{ task.key }}">{{ task.description }}</a>
-                    {% else %}
-                        {{ task.description }}
-                    {% endifequal %}
+                    <a href="/detail/{{ task.key }}">{{ task.description }}</a>
                 </td>
                 <td>{% if task.jira %}
                     {% if task.jiraLink %}

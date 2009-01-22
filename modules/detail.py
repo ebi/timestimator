@@ -19,7 +19,6 @@ class Detail(object):
     
     def checkAuthorization(self, task):
         if task.owner != users.get_current_user():
-            self.addError('Acced denied.')
             return False
         else:
             return True
@@ -51,6 +50,7 @@ class Detail(object):
         if self.error:
             return retVal
         else:
+            retVal['authorized'] = authorized
             retVal['task'] = task
             retVal['estimations'] = task.estimation_set
             return retVal
