@@ -1,0 +1,46 @@
+h1 {
+    font-size: 300%;
+}
+
+h2 {
+    font-size: 200%;
+}
+
+a {
+    color: grey;
+    text-decoration: none;
+}
+
+th {
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.estimationOverview {
+    margin: 2em 0;
+}
+
+.estimationOverview th, .estimationOverview td {
+    padding: 0.5em;
+}
+
+.row2 {
+    background-color: lightgrey;
+}
+
+.fieldset {
+    float: left;
+    margin-right: 1em;
+}
+
+.fieldset label {
+    display: block;
+}
+
+.footer {
+    margin-top: 2em;
+    clear: both;
+}
