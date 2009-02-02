@@ -1,10 +1,61 @@
+body {
+    color: #222;
+    font-family: helvetica, verdana, arial, sans-serif;
+}
+
 a {
-    color: #333;
-    text-decoration: none;
+    color: #555;
+}
+
+a.active, a:active, a:hover {
+    color: #222;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+#title, #navigation, #promoteBox {
+    padding: 0.5em 1em;
+}
+
+#title {
+    padding-left:32px;
+    background: url(/favicon.ico) no-repeat 0.8em 0.5em;
+}
+
+#navigation {
+    background-color: #E1E4CC;
+    border: 1px solid #B3B397;
+    -moz-border-radius: 0.3em;
+    -webkit-border-radius: 0.3em;
+    padding: 0.5em 1em;
+}
+
+#navigation a {
+    display: block;
+    float: left;
+    text-decoration: none;
+    border-right: 0.1em solid #B3B397;
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+}
+
+#promoteBox {
+    margin: 0 1em;
+    border: 1px solid #ddd;
+    border-top: none;
+    -moz-border-radius-bottomleft: 0.3em;
+    -webkit-border-bottom-left-radius: 0.3em;
+    -moz-border-radius-bottomright: 0.3em;
+    -webkit-border-bottom-right-radius: 0.3em;
+    background-color: #eee;
+    padding-bottom: 1em;
+}
+
+.clear {
+    clear:both;
+    height:0;
 }
 
 .success, .error {
