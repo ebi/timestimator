@@ -15,6 +15,11 @@ a:hover {
 	text-decoration: underline;
 }
 
+input.text {
+    border: 0.1em solid #222;
+    padding: 0.2em;
+}
+
 h2.caption {
 	margin: 2em 1em 0 1em;
 	padding: 0.5em 1em;

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block addForm %}
+	<form action="/groups" method="post" id="addGroup">
+		<div id="groupFields" class="fieldset">
+			<label for="group">Group Name:</label>
+			<input class="text" type="text" id="group" name="group" />
+		</div>
+		<div id="addGroupSubmit" class="fieldset">
+			<br />
+			<input type="submit" value="Add Group">
+		</div>
+	</form>
+{% endblock %}
+
+{% block message %}
+	{% if detail.message %}
+		<div class="{% if detail.error %}error{% else %}success{% endif %}">{{ detail.message }}</div>
+	{% endif %}
+{% endblock %}

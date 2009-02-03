@@ -9,7 +9,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
-from modules import add, detail, overview
+from modules import add, detail, overview, groups
 
 
 def getBaseTemplateVars():
@@ -21,11 +21,13 @@ def getBaseTemplateVars():
 class MainHandler(webapp.RequestHandler):
 	"Verify request and authentication call the appropriate template"
 	getUrl = {
+		'/groups': {'template':'groups.html','commands':[groups.Overview]},
 		'/': {'template':'overview.html','commands':[overview.List]},
 	}
 	
 	postUrl = {
 		'/add': {'template':'add.html','commands':[add.Add,overview.List]},
+		'/groups': {'template':'groups.html','commands':[groups.Add,groups.Overview]},
 	}
 	
 	def render(self, urlMap):
