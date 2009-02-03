@@ -1,51 +1,51 @@
 {% extends 'base.html' %}
 
 {% block message %}
-    {% if detail.message %}
-        <div class="{% if detail.error %}error{% else %}success{% endif %}">{{ detail.message }}</div>
-    {% endif %}
+	{% if detail.message %}
+		<div class="{% if detail.error %}error{% else %}success{% endif %}">{{ detail.message }}</div>
+	{% endif %}
 {% endblock %}
 
 {% block content %}
 {% if detail.error %}
-    <h1>Error Occured</h1>
-    <p><a href="/">Homepage</a>.</p>
+	<h1>Error Occured</h1>
+	<p><a href="/">Homepage</a>.</p>
 {% else %}
-    <h1>Details</h1>
-    <h2>{{ detail.task.description }}</h2>
-    <dl>
-        <dt>Owner</dt>
-        <dd>{{detail.task.owner.nickname}}</dd>
-        {% if detail.task.jira %}
-            <dt>Jira</dt>
-            <dd>{{ detail.task.jira }}</dd>
-        {% endif %}
-        <dt>Creation</dt>
-        <dd>{{ detail.task.creation }}</dd>
-        <dt>Task Time</dt>
-        <dd>
-            {% if detail.task.time %}
-                {{ detail.task.time }}
-            {% else %}
-                <form action="/detail/{{ detail.task.key }}" method="POST">
-                    <input type="text" name="time" />
-                </form>
-            {% endif %}
-        </dd>
-    </dl>
-    <h2>Different estimations</h2>
-    <table>
-        <tr>
-            <th>Author</th>
-            <th>Time</th>
-        </tr>
-        {% for estimation in detail.estimations %}
-            <tr>
-                <td>{{estimation.owner}}</td>
-                <td>{{estimation.time}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+	<h1>Details</h1>
+	<h2>{{ detail.task.description }}</h2>
+	<dl>
+		<dt>Owner</dt>
+		<dd>{{detail.task.owner.nickname}}</dd>
+		{% if detail.task.jira %}
+			<dt>Jira</dt>
+			<dd>{{ detail.task.jira }}</dd>
+		{% endif %}
+		<dt>Creation</dt>
+		<dd>{{ detail.task.creation }}</dd>
+		<dt>Task Time</dt>
+		<dd>
+			{% if detail.task.time %}
+				{{ detail.task.time }}
+			{% else %}
+				<form action="/detail/{{ detail.task.key }}" method="POST">
+					<input type="text" name="time" />
+				</form>
+			{% endif %}
+		</dd>
+	</dl>
+	<h2>Different estimations</h2>
+	<table>
+		<tr>
+			<th>Author</th>
+			<th>Time</th>
+		</tr>
+		{% for estimation in detail.estimations %}
+			<tr>
+				<td>{{estimation.owner}}</td>
+				<td>{{estimation.time}}</td>
+			</tr>
+		{% endfor %}
+	</table>
 {% endif %}
 <a href="/">Homepage</a>
 {% endblock %}

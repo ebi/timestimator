@@ -1,107 +1,107 @@
 body {
-    color: #222;
-    font-family: helvetica, verdana, arial, sans-serif;
+	color: #222;
+	font-family: helvetica, verdana, arial, sans-serif;
 }
 
 a {
-    color: #555;
+	color: #555;
 }
 
 a.active, a:active, a:hover {
-    color: #222;
+	color: #222;
 }
 
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 h2.caption {
-    margin: 2em 1em 0 1em;
-    padding: 0.5em 1em;
+	margin: 2em 1em 0 1em;
+	padding: 0.5em 1em;
 }
 
 #title, #navigation, #promoteBox {
-    padding: 0.5em 1em;
+	padding: 0.5em 1em;
 }
 
 #title {
-    padding-left:32px;
-    background: url(/favicon.ico) no-repeat 0.8em 0.5em;
+	padding-left:32px;
+	background: url(/favicon.ico) no-repeat 0.8em 0.5em;
 }
 
 #navigation {
-    background: #e7ead8 url(/images/navigation_bg.png) repeat-x bottom left;
-    border: 1px solid #B3B397;
-    -moz-border-radius: 0.3em;
-    -webkit-border-radius: 0.3em;
-    padding: 0.5em 1em;
+	background: #e7ead8 url(/images/navigation_bg.png) repeat-x bottom left;
+	border: 1px solid #B3B397;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	padding: 0.5em 1em;
 }
 
 #navigation a {
-    display: block;
-    float: left;
-    text-decoration: none;
-    border-right: 0.1em solid #B3B397;
-    padding-right: 0.5em;
-    margin-right: 0.5em;
+	display: block;
+	float: left;
+	text-decoration: none;
+	border-right: 0.1em solid #B3B397;
+	padding-right: 0.5em;
+	margin-right: 0.5em;
 }
 
 #promoteBox {
-    margin: 0 1em;
-    border: 1px solid #ddd;
-    border-top: none;
-    -moz-border-radius-bottomleft: 0.3em;
-    -webkit-border-bottom-left-radius: 0.3em;
-    -moz-border-radius-bottomright: 0.3em;
-    -webkit-border-bottom-right-radius: 0.3em;
-    background-color: #eee;
-    padding-bottom: 1em;
+	margin: 0 1em;
+	border: 1px solid #ddd;
+	border-top: none;
+	-moz-border-radius-bottomleft: 0.3em;
+	-webkit-border-bottom-left-radius: 0.3em;
+	-moz-border-radius-bottomright: 0.3em;
+	-webkit-border-bottom-right-radius: 0.3em;
+	background-color: #eee;
+	padding-bottom: 1em;
 }
 
 .clear {
-    clear:both;
-    height:0;
+	clear:both;
+	height:0;
 }
 
 .success, .error {
-    padding: 1em;
-    margin: 2em 0;
+	padding: 1em;
+	margin: 2em 0;
 }
 
 .success {
-    border: 0.1em solid green;
-    background-color: lightgreen;
+	border: 0.1em solid green;
+	background-color: lightgreen;
 }
 
 .error {
-    border: 0.1em solid red;
-    background-color: #ffebe8;
+	border: 0.1em solid red;
+	background-color: #ffebe8;
 }
 
 .even, table .header th {
-    font-weight: normal;
-    background-color: #eee;
+	font-weight: normal;
+	background-color: #eee;
 }
 
 td, th {
-    border: 1px solid #ddd;
-    border-left: none;
+	border: 1px solid #ddd;
+	border-left: none;
 }
 
 th:last-child, td:last-child {
-    border-right: none;
+	border-right: none;
 }
 
 .fieldset {
-    float: left;
-    margin-right: 1em;
+	float: left;
+	margin-right: 1em;
 }
 
 .fieldset label {
-    display: block;
+	display: block;
 }
 
 .footer {
-    margin-top: 2em;
-    clear: both;
+	margin-top: 2em;
+	clear: both;
 }
