@@ -15,6 +15,18 @@ a:hover {
     text-decoration: underline;
 }
 
+h2.caption {
+    margin: 1em 1em 0 1em;
+    border: 1px solid #B3B397;
+    border-bottom: none;
+    -moz-border-radius-topleft: 0.3em;
+    -webkit-border-top-left-radius: 0.3em;
+    -moz-border-radius-topright: 0.3em;
+    -webkit-border-top-right-radius: 0.3em;
+    background-color: #e7ead8;
+    padding: 0.5em 1em;
+}
+
 #title, #navigation, #promoteBox {
     padding: 0.5em 1em;
 }
@@ -25,7 +37,7 @@ a:hover {
 }
 
 #navigation {
-    background-color: #E1E4CC;
+    background: #e7ead8 url(/images/navigation_bg.png) repeat-x bottom left;
     border: 1px solid #B3B397;
     -moz-border-radius: 0.3em;
     -webkit-border-radius: 0.3em;
@@ -73,8 +85,18 @@ a:hover {
     background-color: #ffebe8;
 }
 
-.row2 {
-    background-color: lightgrey;
+.even, table .header th {
+    font-weight: normal;
+    background-color: #eee;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    border-left: none;
+}
+
+th:last-child, td:last-child {
+    border-right: none;
 }
 
 .fieldset {

@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Recent time estimations</h2>
+    <h2 class="caption">Recent time estimations</h2>
     <table class="estimationOverview">
-        <tr>
-            <th>Description</th>
-            <th>Jira</th>
-            <th>Owner</th>
-            <th>Time Taken</th>
-            <th>Your Est</th>
-            <th>Diff</th>
-            <th>Avg Est</th>
+        <tr class="header">
+            <th>DESCRIPTION</th>
+            <th>JIRA</th>
+            <th>OWNER</th>
+            <th>TIME TAKEN</th>
+            <th>YOUR ESTIMATION</th>
+            <th>DIFFERENCE</th>
+            <th>AVERAGE ESTIMATION</th>
         </tr>
         {% for task in list.tasks %}
-            <tr class="{% cycle row1,row2 %}">
+            <tr class="{% cycle odd,even %}">
                 <td>
                     <a href="/detail/{{ task.key }}">{{ task.description }}</a>
                 </td>
