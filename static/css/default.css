@@ -16,14 +16,7 @@ a:hover {
 }
 
 h2.caption {
-    margin: 1em 1em 0 1em;
-    border: 1px solid #B3B397;
-    border-bottom: none;
-    -moz-border-radius-topleft: 0.3em;
-    -webkit-border-top-left-radius: 0.3em;
-    -moz-border-radius-topright: 0.3em;
-    -webkit-border-top-right-radius: 0.3em;
-    background-color: #e7ead8;
+    margin: 2em 1em 0 1em;
     padding: 0.5em 1em;
 }
 
