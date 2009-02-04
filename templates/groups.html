@@ -18,3 +18,26 @@
 		<div class="{% if detail.error %}error{% else %}success{% endif %}">{{ detail.message }}</div>
 	{% endif %}
 {% endblock %}
+
+{% block content %}
+<h2>Groups</h2>
+<table class="groupsOverview">
+	<tr class="header">
+		<th>GROUP</th>
+		<th>OWNER</th>
+		<th/>
+	</tr>
+	{% for group in overview.groups %}
+		<tr class="{% cycle odd,even %}">
+			<td>{{group.name}}</td>
+			<td>{{group.owner}}</td>
+			<td>
+				<form action="/groups/{{group.key}}" method="post">
+					<input type="hidden" name="addMemeber" value="{{user}}">
+					<input type="submit" value="Join" />
+				</form>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}
