@@ -1,11 +1,23 @@
 import models
 import re
+import pprint
 from google.appengine.ext import db
 from google.appengine.api import users
 
 class Overview(object):
 	def process(self, request):
-		return {'groups': models.Group.all()}
+		returnOwnGroups = []
+		# returnForeignGroups = []
+		ownGroups = models.GroupMember.gql("WHERE name = :1 ORDER BY creation DESC", users.get_current_user())
+		for ownGroup in ownGroups:
+			returnOwnGroups.append(ownGroup.group)
+		# for group in models.Group.all():
+		# 	if group not in returnOwnGroups:
+		# 		returnForeignGroups.append(group)
+		return {
+			'groups': models.Group.all(),
+			'ownGroups': returnOwnGroups,
+		}
 
 class Add(object):
 	error = False
@@ -20,11 +32,23 @@ class Add(object):
 				self.message = 'Group already exists.'
 				self.error = True
 			else:
-				group = models.Group()
-				group.name = groupName
-				group.owner = users.get_current_user()
+				group = models.Group(
+					name=groupName,
+					owner=users.get_current_user()
+				)
 				group.put()
-				self.message = 'Group created.'
+				try:
+					member = models.GroupMember(
+						group = group.key(),
+						name = group.owner,
+						stauts = 2,
+					)
+					member.put()
+					self.message = 'Group created.'
+				except:
+					group.delete();
+					self.error = True
+					self.message = 'Group creation failed'
 		else:
 			self.message = 'Group names can consist of 0-9, A-Z, a-z, -, . and _.'
 			self.error = True

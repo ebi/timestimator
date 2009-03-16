@@ -20,7 +20,6 @@
 					<br class="clear" />
 				</div>
 				<div id="promoteBox">
-					{% block message %}{% endblock %}
 					{% block addForm %}
 						<form action="/add" method="post" id="addEstimation">
 							<div id="descriptonFields" class="fieldset">
@@ -43,6 +42,7 @@
 					{% endblock %}
 					<br class="clear" />
 				</div>
+				{% block message %}{% endblock %}
 			</div>
 		{% endblock %}
 		{% block content %}

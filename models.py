@@ -1,14 +1,18 @@
 from google.appengine.ext import db
 
 class Group(db.Model):
-	name = db.StringProperty()
+	name = db.StringProperty(required=True)
 	creation = db.DateTimeProperty(auto_now_add=True)
 	owner = db.UserProperty()
 
 class GroupMember(db.Model):
 	group = db.ReferenceProperty(Group,required=True)
-	member = db.UserProperty(required=True)
-	state = db.IntegerProperty(required=True)
+	name = db.UserProperty(required=True)
+	# Current states are
+	# 0: Unapproved
+	# 1: Member
+	# 2: Admin
+	status = db.IntegerProperty(required=True, default=0)
 	creation = db.DateTimeProperty(auto_now_add=True, required=True)
 
 class Task(db.Model):

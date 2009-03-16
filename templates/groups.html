@@ -14,13 +14,36 @@
 {% endblock %}
 
 {% block message %}
-	{% if detail.message %}
-		<div class="{% if detail.error %}error{% else %}success{% endif %}">{{ detail.message }}</div>
+	{% if add.message %}
+		<div class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</div>
 	{% endif %}
 {% endblock %}
 
 {% block content %}
-<h2>Groups</h2>
+{% if overview.ownGroups %}
+	<h2>Your Groups</h2>
+	<table class="groupsOverview">
+		<tr class="header">
+			<th>GROUP</th>
+			<th>OWNER</th>
+			<th/>
+		</tr>
+		{% for group in overview.ownGroups %}
+			<tr class="{% cycle odd,even %}">
+				<td>{{group.name}}</td>
+				<td>{{group.owner}}</td>
+				<td>
+					<form action="/groups/{{group.key}}" method="post">
+						<input type="hidden" name="delete" value="{{group.key}}">
+						<input type="submit" value="Leave" />
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endif %}
+
+<h2>All Groups</h2>
 <table class="groupsOverview">
 	<tr class="header">
 		<th>GROUP</th>
