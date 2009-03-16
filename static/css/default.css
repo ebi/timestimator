@@ -110,3 +110,7 @@ th:last-child, td:last-child {
 	margin-top: 2em;
 	clear: both;
 }
+
+.requestForm {
+    float: left;
+}

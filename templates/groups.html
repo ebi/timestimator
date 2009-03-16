@@ -28,8 +28,7 @@
 <table class="groupsOverview">
 	<tr class="header">
 		<th>GROUP</th>
-		<th>OWNER</th>
-		<th>STATE</th>
+		<th>USER</th>
 		<th/>
 	</tr>
 	{% for request in overview.requests %}
@@ -37,12 +36,12 @@
 			<td>{{request.group.name}}</td>
 			<td>{{request.name}}</td>
 			<td>
-				<form action="/groups/{{member.group.key}}" method="post">
+				<form action="/groups/{{request.group.key}}" method="post" class="requestForm">
 					<input type="hidden" name="delete" value="{{request.group.key}}">
 					<input type="hidden" name="delMember" value="{{request.name.email}}">
 					<input type="submit" value="Deny" />
 				</form>
-				<form action="/groups/{{member.group.key}}" method="post">
+				<form action="/groups/{{request.group.key}}" method="post" class="requestForm">
 					<input type="hidden" name="addMember" value="{{request.name.email}}">
 					<input type="submit" value="Accept" />
 				</form>

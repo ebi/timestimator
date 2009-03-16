@@ -1,6 +1,5 @@
 import models
 import re
-import pprint
 from google.appengine.ext import db
 from google.appengine.api import users
 
@@ -86,12 +85,12 @@ class Join(object):
 				members = models.GroupMember.gql('WHERE group = :1 AND name = :2', group, memberName)
 				if admins.count() > 0 and members.count() > 0:
 					member = members.get()
-					pprint.pprint(member)
 					if 'True' == request.get('setAdmin'):
+						self.message = 'Admin privileges granted.'
 						member.status = 2
 					else: 
-						# member.status = 1;
-						pass
+						self.message = 'Join request accepted.'
+						member.status = 1;
 					member.put()
 				else:
 					self.error = True
