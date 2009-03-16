@@ -9,14 +9,9 @@ class Overview(object):
 		returnOwnGroups = []
 		# returnForeignGroups = []
 		ownGroups = models.GroupMember.gql("WHERE name = :1 ORDER BY creation DESC", users.get_current_user())
-		for ownGroup in ownGroups:
-			returnOwnGroups.append(ownGroup.group)
-		# for group in models.Group.all():
-		# 	if group not in returnOwnGroups:
-		# 		returnForeignGroups.append(group)
 		return {
 			'groups': models.Group.all(),
-			'ownGroups': returnOwnGroups,
+			'member': ownGroups,
 		}
 
 class Add(object):

@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-{% if overview.ownGroups %}
+{% if overview.member %}
 	<h2>Your Groups</h2>
 	<table class="groupsOverview">
 		<tr class="header">
@@ -28,13 +28,13 @@
 			<th>OWNER</th>
 			<th/>
 		</tr>
-		{% for group in overview.ownGroups %}
+		{% for member in overview.member %}
 			<tr class="{% cycle odd,even %}">
-				<td>{{group.name}}</td>
-				<td>{{group.owner}}</td>
+				<td>{{member.group.name}}</td>
+				<td>{{member.group.owner}}</td>
 				<td>
-					<form action="/groups/{{group.key}}" method="post">
-						<input type="hidden" name="delete" value="{{group.key}}">
+					<form action="/groups/{{member.group.key}}" method="post">
+						<input type="hidden" name="delete" value="{{member.group.key}}">
 						<input type="submit" value="Leave" />
 					</form>
 				</td>
@@ -55,10 +55,10 @@
 			<td>{{group.name}}</td>
 			<td>{{group.owner}}</td>
 			<td>
-				<form action="/groups/{{group.key}}" method="post">
-					<input type="hidden" name="addMemeber" value="{{user}}">
-					<input type="submit" value="Join" />
-				</form>
+					<form action="/groups/{{group.key}}" method="post">
+						<input type="hidden" name="addMemeber" value="{{user}}">
+						<input type="submit" value="Join" />
+					</form>
 			</td>
 		</tr>
 	{% endfor %}
