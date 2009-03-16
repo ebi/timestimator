@@ -23,6 +23,34 @@
 {% endblock %}
 
 {% block content %}
+{% if overview.requests %}
+<h2>Join Requests</h2>
+<table class="groupsOverview">
+	<tr class="header">
+		<th>GROUP</th>
+		<th>OWNER</th>
+		<th>STATE</th>
+		<th/>
+	</tr>
+	{% for request in overview.requests %}
+		<tr class="{% cycle odd,even %}">
+			<td>{{request.group.name}}</td>
+			<td>{{request.name}}</td>
+			<td>
+				<form action="/groups/{{member.group.key}}" method="post">
+					<input type="hidden" name="delete" value="{{request.group.key}}">
+					<input type="hidden" name="delMember" value="{{request.name.email}}">
+					<input type="submit" value="Deny" />
+				</form>
+				<form action="/groups/{{member.group.key}}" method="post">
+					<input type="hidden" name="addMember" value="{{request.name.email}}">
+					<input type="submit" value="Accept" />
+				</form>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endif %}
 {% if overview.member %}
 	<h2>Your Groups</h2>
 	<table class="groupsOverview">
