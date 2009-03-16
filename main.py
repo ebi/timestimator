@@ -4,6 +4,7 @@ import os
 import wsgiref.handlers
 import locale
 import models
+import pprint
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -76,11 +77,26 @@ class AddEstimationHandler(webapp.RequestHandler):
 		templateVars['list'] = list.process(self.request)
 		path = os.path.join(os.path.dirname(__file__), 'templates/add.html')
 		self.response.out.write(template.render(path, templateVars))
-	
+
+class GroupsTaskHandler(webapp.RequestHandler):
+	def get(self, groupKey):
+		self.redirect('/groups')
+
+	def post(self, groupKey):
+		if self.request.get('delete'):
+			group = groups.Delete()
+		else:
+			group = groups.Join()
+		templateVars = getBaseTemplateVars()
+		templateVars['overview'] = group.process(self.request, groupKey)
+		pprint.pprint(templateVars)
+		path = os.path.join(os.path.dirname(__file__), 'templates/groups.html')
+		self.response.out.write(template.render(path, templateVars))
 
 application = webapp.WSGIApplication(
 									 [(r'/add/(.*)', AddEstimationHandler),
 									  (r'/detail/(.*)', DetailTaskHandler),
+									  (r'/groups/(.*)', GroupsTaskHandler),
 									  (r'.*', MainHandler),
 									 ],
 									 debug=True)

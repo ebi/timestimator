@@ -17,6 +17,9 @@
 	{% if add.message %}
 		<div class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</div>
 	{% endif %}
+	{% if overview.message %}
+		<div class="{% if overview.error %}error{% else %}success{% endif %}">{{ overview.message }}</div>
+	{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -26,12 +29,18 @@
 		<tr class="header">
 			<th>GROUP</th>
 			<th>OWNER</th>
+			<th>STATE</th>
 			<th/>
 		</tr>
 		{% for member in overview.member %}
 			<tr class="{% cycle odd,even %}">
 				<td>{{member.group.name}}</td>
 				<td>{{member.group.owner}}</td>
+				<td>
+					{% ifequal member.status 0 %}Unconfirmed{% endifequal %}
+					{% ifequal member.status 1 %}Member{% endifequal %}
+					{% ifequal member.status 2 %}Admin{% endifequal %}
+				</td>
 				<td>
 					<form action="/groups/{{member.group.key}}" method="post">
 						<input type="hidden" name="delete" value="{{member.group.key}}">
@@ -56,7 +65,7 @@
 			<td>{{group.owner}}</td>
 			<td>
 					<form action="/groups/{{group.key}}" method="post">
-						<input type="hidden" name="addMemeber" value="{{user}}">
+						<input type="hidden" name="addMember" value="{{user.email}}">
 						<input type="submit" value="Join" />
 					</form>
 			</td>
