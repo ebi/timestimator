@@ -21,7 +21,7 @@
 				</div>
 				<div id="promoteBox">
 					{% block addForm %}
-						{% if list.members %}
+						{% if list.members.count %}
 							<form action="/add" method="post" id="addEstimation">
 								<div id="descriptonFields" class="fieldset">
 									<label for="description">Description:</label>

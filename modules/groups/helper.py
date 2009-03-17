@@ -12,6 +12,7 @@ def isUserInGroup(user, group):
 			group = db.get(group)
 		except:
 			return False
+		
 	permissions = models.GroupMember.gql('WHERE group = :1 AND name = :2 and status > 0', group, user)
 	if permissions.count() > 0:
 		return True

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if list.tasks %}
 	<h2 class="caption">Recent time estimations</h2>
 	<table class="estimationOverview">
 		<tr class="header">
@@ -42,4 +43,5 @@
 			</tr>
 		{% endfor %}
 	</table>
+{% endif %}
 {% endblock %}
