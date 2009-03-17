@@ -20,6 +20,10 @@ input.text {
     padding: 0.2em;
 }
 
+input.short {
+    width: 7.5em;
+}
+
 h2.caption {
 	margin: 2em 1em 0 1em;
 	padding: 0.5em 1em;

@@ -6,7 +6,7 @@
 		<tr class="header">
 			<th>DESCRIPTION</th>
 			<th>JIRA</th>
-			<th>OWNER</th>
+			<th>GROUP</th>
 			<th>TIME TAKEN</th>
 			<th>YOUR ESTIMATION</th>
 			<th>DIFFERENCE</th>
@@ -24,7 +24,7 @@
 						{{ task.jira }}
 					{% endif %}
 				{% endif %}</td>
-				<td>{{ task.owner }}</td>
+				<td>{{ task.group }}</td>
 				<td>
 					{% if task.time %}
 						{{ task.time }}

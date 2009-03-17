@@ -1,5 +1,7 @@
 from google.appengine.ext import db
 from google.appengine.api import users
+import models
+import groups.overview
 
 __all__ = ['List']
 
@@ -8,7 +10,7 @@ class DisplayTask():
 	description = None
 	jira = None
 	jiraLink = None
-	owner = None
+	group = None
 	time = None
 	yourEstimation = None
 	averageEstimation = None
@@ -18,14 +20,24 @@ class List(object):
 	knownJira = {
 		'LCL': 'https://jira.local.ch/browse/'
 	}
-
+	
+	def getTasks(self, members):
+		returnTasks = []
+		for member in members:
+			tasks = models.Task.gql("WHERE group = :1 ORDER BY creation DESC", member.group)
+			for task in tasks:
+				returnTasks.append(task)
+		return returnTasks
+		
+	
 	def process(self, request):
 		returnTasks = []
-		tasks = db.GqlQuery("SELECT * FROM Task ORDER BY creation DESC")
+		members = groups.overview.getConfirmedOwnGroups()
+		tasks = self.getTasks(members)
 		for task in tasks:
 			displayTask = DisplayTask()
 			displayTask.key = task.key()
-			displayTask.owner = task.owner.nickname
+			displayTask.group = task.group.name
 			displayTask.description = task.description
 			displayTask.time = task.time
 			if None != task.jira:
@@ -47,5 +59,6 @@ class List(object):
 					displayTask.difference = round(displayTask.yourEstimation / (displayTask.time/100) - 100, 1) * -1
 			returnTasks.append(displayTask)
 		return {
+			'members': members,
 			'tasks': returnTasks,
 		}

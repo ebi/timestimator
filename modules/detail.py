@@ -1,6 +1,8 @@
 import re
 import locale
 
+from groups import helper
+
 from google.appengine.api import users
 from google.appengine.ext import db
 
@@ -29,19 +31,23 @@ class Detail(object):
 		except:
 			self.addError('Could not get task.')
 		
-		authorized = self.checkAuthorization(task);
-		if authorized and 'POST' == request.method:
-			time = request.get('time')
-			if time:
-				if re.match('^\d+\.?\d*$', time):
-					if task.time:
-						self.addError('Time already set.')
+		if helper.isUserInGroup(users.get_current_user(), task.group):
+			authorized = self.checkAuthorization(task);
+			if authorized and 'POST' == request.method:
+				time = request.get('time')
+				if time:
+					if re.match('^\d+\.?\d*$', time):
+						if task.time:
+							self.addError('Time already set.')
+						else:
+							time = locale.atof(time)
+							task.time = time
+							task.put()
 					else:
-						time = locale.atof(time)
-						task.time = time
-						task.put()
-				else:
-					self.addError('Time must be a number.')
+						self.addError('Time must be a number.')
+		else:
+			self.error = True
+			self.message = "You're not member of the group this task belongs to. "
 		
 		retVal = {
 			'error': self.error,

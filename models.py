@@ -30,4 +30,3 @@ class Estimation(db.Model):
 	owner = db.UserProperty(required=True)
 	creation = db.DateTimeProperty(auto_now_add=True, required=True)
 	time = db.FloatProperty(required=True)
-

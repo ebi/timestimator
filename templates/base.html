@@ -21,24 +21,36 @@
 				</div>
 				<div id="promoteBox">
 					{% block addForm %}
-						<form action="/add" method="post" id="addEstimation">
-							<div id="descriptonFields" class="fieldset">
-								<label for="description">Description:</label>
-								<input class="text" type="text" name="description" id="description" />
-							</div>
-							<div id="jiraFields" class="fieldset">
-								<label for="jira">Jira Issue:</label>
-								<input class="text" type="text" name="jira" id="jira" />
-							</div>
-							<div id="estimatedTimeFields" class="fieldset">
-								<label for="estimatedTime">Estimated Time:</label>
-								<input class="text" type="text" name="estimatedTime" id="estimatedTime" />
-							</div>
-							<div id="addEstimationSubmit" class="fieldset">
-								<br />
-								<input type="submit" value="Add Estimation"/>
-							</div>
-						</form>
+						{% if list.members %}
+							<form action="/add" method="post" id="addEstimation">
+								<div id="descriptonFields" class="fieldset">
+									<label for="description">Description:</label>
+									<input class="text" type="text" name="description" id="description" />
+								</div>
+								<div id="jiraFields" class="fieldset">
+									<label for="jira">Jira Issue:</label>
+									<input class="text short" type="text" name="jira" id="jira" />
+								</div>
+								<div id="estimatedTimeFields" class="fieldset">
+									<label for="estimatedTime">Estimated Time:</label>
+									<input class="text short" type="text" name="estimatedTime" id="estimatedTime" />
+								</div>
+								<div id="estimationGroup" class="fieldset">
+									<label for="estimationGroup">Group</label>
+									<select id="estimationGroup" name="estimationGroup">
+										{% for member in list.members %}
+											<option value="{{member.group.key}}">{{member.group.name}}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<div id="addEstimationSubmit" class="fieldset">
+									<br />
+									<input type="submit" value="Add Estimation"/>
+								</div>
+							</form>
+						{% else %}
+							You need to create or join a <a href="/groups">group</a> to add an Estimation.
+						{% endif %}
 					{% endblock %}
 					<br class="clear" />
 				</div>
