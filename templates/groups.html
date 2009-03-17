@@ -17,8 +17,11 @@
 	{% if add.message %}
 		<div class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</div>
 	{% endif %}
-	{% if overview.message %}
-		<div class="{% if overview.error %}error{% else %}success{% endif %}">{{ overview.message }}</div>
+	{% if join.message %}
+		<div class="{% if join.error %}error{% else %}success{% endif %}">{{ join.message }}</div>
+	{% endif %}
+	{% if delete.message %}
+		<div class="{% if delete.error %}error{% else %}success{% endif %}">{{ delete.message }}</div>
 	{% endif %}
 {% endblock %}
 

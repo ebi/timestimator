@@ -22,13 +22,13 @@ def getBaseTemplateVars():
 class MainHandler(webapp.RequestHandler):
 	"Verify request and authentication call the appropriate template"
 	getUrl = {
-		'/groups': {'template':'groups.html','commands':[groups.Overview]},
+		'/groups': {'template':'groups.html','commands':[groups.overview.Overview]},
 		'/': {'template':'overview.html','commands':[overview.List]},
 	}
 	
 	postUrl = {
 		'/add': {'template':'add.html','commands':[add.Add,overview.List]},
-		'/groups': {'template':'groups.html','commands':[groups.Add,groups.Overview]},
+		'/groups': {'template':'groups.html','commands':[groups.add.Add,groups.overview.Overview]},
 	}
 	
 	def render(self, urlMap):
@@ -83,13 +83,16 @@ class GroupsTaskHandler(webapp.RequestHandler):
 		self.redirect('/groups')
 
 	def post(self, groupKey):
-		if self.request.get('delete'):
-			group = groups.Delete()
-		else:
-			group = groups.Join()
 		templateVars = getBaseTemplateVars()
-		templateVars['overview'] = group.process(self.request, groupKey)
-		pprint.pprint(templateVars)
+		if self.request.get('delete'):
+			taskName = 'delete'
+			group = groups.delete.Delete()
+		else:
+			taskname = 'join'
+			group = groups.join.Join()
+		templateVars[taskname] = group.process(self.request, groupKey)
+		group = groups.overview.Overview()
+		templateVars['overview'] = group.process(self.request)
 		path = os.path.join(os.path.dirname(__file__), 'templates/groups.html')
 		self.response.out.write(template.render(path, templateVars))
 
