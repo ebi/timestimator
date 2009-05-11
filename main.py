@@ -88,9 +88,9 @@ class GroupsTaskHandler(webapp.RequestHandler):
 			taskName = 'delete'
 			group = groups.delete.Delete()
 		else:
-			taskname = 'join'
+			taskName = 'join'
 			group = groups.join.Join()
-		templateVars[taskname] = group.process(self.request, groupKey)
+		templateVars[taskName] = group.process(self.request, groupKey)
 		group = groups.overview.Overview()
 		templateVars['overview'] = group.process(self.request)
 		path = os.path.join(os.path.dirname(__file__), 'templates/groups.html')

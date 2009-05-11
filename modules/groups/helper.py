@@ -1,6 +1,7 @@
 import types
 import models
 from google.appengine.ext import db
+from google.appengine.api import users
 
 def getGroup(group):
 	if types.StringType == type(group):
@@ -12,7 +13,7 @@ def getGroup(group):
 		return group
 
 def getUser(user):
-	if types.StringType == type(user):
+	if types.UnicodeType == type(user):
 		return users.User(user)
 	else:
 		return user
