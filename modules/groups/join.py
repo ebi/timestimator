@@ -51,7 +51,7 @@ class Join(object):
 					)
 					member.put()
 					sender_address = user.email()
-					subject = '[timestimator] ' + user.nickname() + 'requested to join ' + group.name
+					subject = '[timestimator] ' + user.nickname() + ' requested to join ' + group.name
 					body = """%s requested to join your group %s.
 Visit http://timestimator.gorn.ch/groups to accept or deny the request.
 					""" % (user.nickname(), group.name)
