@@ -1,0 +1,55 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<h1>Details</h1>
+<h2>{{ detail.group.name }}</h2>
+<dl>
+	<dt>Owner</dt>
+	<dd>{{detail.group.owner}}</dd>
+	<dt>Creation</dt>
+	<dd>{{detail.group.creation}}</dd>
+</dl>
+<table>
+	<tr>
+		<th>MEMBER</th>
+		<th>STATE</th>
+		{% ifequal detail.permission 2 %}
+			<th/>
+		{% endifequal %}
+	</tr>
+	{% for member in detail.members %}
+		<tr>
+			<td>{{member.name}}</td>
+			<td>
+				{% ifequal member.status 0 %}Unconfirmed{% endifequal %}
+				{% ifequal member.status 1 %}Member{% endifequal %}
+				{% ifequal member.status 2 %}Admin{% endifequal %}
+			</td>
+			{% ifequal detail.permission 2 %}
+				<td>
+					<form action="/groups/{{detail.group.key}}" method="post">
+						<input type="hidden" name="delete" value="{{detail.group.key}}" />
+						<input type="hidden" name="delMember" value="{{member.name.email}}" />
+						<input type="submit" value="Delete" />
+					</form>
+					{% ifequal member.status 0 %}
+						<form action="/groups/{{detail.group.key}}" method="post">
+							<input type="hidden" name="addMember" value="{{member.name.email}}" />
+							<input type="submit" value="Accept join request" />
+						</form>
+					{% endifequal %}
+					{% ifequal member.status 1 %}
+						<form action="/groups/{{detail.group.key}}" method="post">
+							<input type="hidden" name="addMember" value="{{member.name.email}}" />
+							<input type="hidden" name="setAdmin" value="True" />
+							<input type="submit" value="Promote to Admin" />
+						</form>
+					{% endifequal %}
+				</td>
+			{% endifequal %}
+		</tr>
+	{% endfor %}
+</table>
+{% endblock content %}
+
+{% block addForm %}{% endblock %}

@@ -36,7 +36,7 @@
 	</tr>
 	{% for request in overview.requests %}
 		<tr class="{% cycle odd,even %}">
-			<td>{{request.group.name}}</td>
+			<td><a href="/groups/{{request.group.key}}">{{request.group.name}}</a></td>
 			<td>{{request.name}}</td>
 			<td>
 				<form action="/groups/{{request.group.key}}" method="post" class="requestForm">
@@ -64,7 +64,7 @@
 		</tr>
 		{% for member in overview.member %}
 			<tr class="{% cycle odd,even %}">
-				<td>{{member.group.name}}</td>
+				<td><a href="/groups/{{member.group.key}}">{{member.group.name}}</a></td>
 				<td>{{member.group.owner}}</td>
 				<td>
 					{% ifequal member.status 0 %}Unconfirmed{% endifequal %}
@@ -91,7 +91,7 @@
 	</tr>
 	{% for group in overview.groups %}
 		<tr class="{% cycle odd,even %}">
-			<td>{{group.name}}</td>
+			<td><a href="/groups/{{group.key}}">{{group.name}}</a></td>
 			<td>{{group.owner}}</td>
 			<td>
 					<form action="/groups/{{group.key}}" method="post">

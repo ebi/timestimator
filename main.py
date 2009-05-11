@@ -80,8 +80,12 @@ class AddEstimationHandler(webapp.RequestHandler):
 
 class GroupsTaskHandler(webapp.RequestHandler):
 	def get(self, groupKey):
-		self.redirect('/groups')
-
+		templateVars = getBaseTemplateVars()
+		group = groups.detail.Detail()
+		templateVars['detail'] = group.process(self.request, groupKey)
+		path = os.path.join(os.path.dirname(__file__), 'templates/groups/detail.html')
+		self.response.out.write(template.render(path, templateVars))
+		
 	def post(self, groupKey):
 		templateVars = getBaseTemplateVars()
 		if self.request.get('delete'):
