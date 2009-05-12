@@ -37,7 +37,7 @@ class List(object):
 		for task in tasks:
 			displayTask = DisplayTask()
 			displayTask.key = task.key()
-			displayTask.group = task.group.name
+			displayTask.group = task.group
 			displayTask.description = task.description
 			displayTask.time = task.time
 			if None != task.jira:

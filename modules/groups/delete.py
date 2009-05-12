@@ -32,7 +32,7 @@ class Delete(object):
 			self.setError('No permission to change this group. ')
 			
 		if False == self.error:
-			members = models.GroupMember.gql('WHERE name = :1', user)
+			members = models.GroupMember.gql('WHERE name = :1 and group = :2', user, group)
 			if 0 == members.count():
 				self.setError("Can't find group membership. ")
 			else:

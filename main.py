@@ -95,9 +95,9 @@ class GroupsTaskHandler(webapp.RequestHandler):
 			taskName = 'join'
 			group = groups.join.Join()
 		templateVars[taskName] = group.process(self.request, groupKey)
-		group = groups.overview.Overview()
-		templateVars['overview'] = group.process(self.request)
-		path = os.path.join(os.path.dirname(__file__), 'templates/groups.html')
+		group = groups.detail.Detail()
+		templateVars['detail'] = group.process(self.request, groupKey)
+		path = os.path.join(os.path.dirname(__file__), 'templates/groups/detail.html')
 		self.response.out.write(template.render(path, templateVars))
 
 application = webapp.WSGIApplication(

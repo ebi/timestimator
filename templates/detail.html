@@ -16,7 +16,7 @@
 		<dt>Owner</dt>
 		<dd>{{detail.task.owner.nickname}}</dd>
 		<dt>Group</dt>
-		<dd>{{detail.task.group.name}}</dd>
+		<dd><a href="/groups/{{detail.task.group.key}}">{{detail.task.group.name}}</a></dd>
 		{% if detail.task.jira %}
 			<dt>Jira</dt>
 			<dd>{{ detail.task.jira }}</dd>

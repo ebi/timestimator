@@ -25,7 +25,7 @@
 						{{ task.jira }}
 					{% endif %}
 				{% endif %}</td>
-				<td>{{ task.group }}</td>
+				<td><a href="/groups/{{task.group.key}}">{{ task.group.name }}</a></td>
 				<td>
 					{% if task.time %}
 						{{ task.time }}

@@ -25,6 +25,9 @@ class Join(object):
 					if 'True' == request.get('setAdmin'):
 						self.message = 'Admin privileges granted.'
 						member.status = 2
+					elif 'True' == request.get('setMember'):
+						self.message = 'Admin privileges revoked.'
+						member.status = 1
 					else:
 						user = users.get_current_user()
 						sender_address = user.email()

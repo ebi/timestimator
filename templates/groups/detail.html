@@ -1,5 +1,17 @@
 {% extends '../base.html' %}
 
+{% block message %}
+	{% if add.message %}
+		<div class="{% if add.error %}error{% else %}success{% endif %}">{{ add.message }}</div>
+	{% endif %}
+	{% if join.message %}
+		<div class="{% if join.error %}error{% else %}success{% endif %}">{{ join.message }}</div>
+	{% endif %}
+	{% if delete.message %}
+		<div class="{% if delete.error %}error{% else %}success{% endif %}">{{ delete.message }}</div>
+	{% endif %}
+{% endblock %}
+
 {% block content %}
 <h1>Details</h1>
 <h2>{{ detail.group.name }}</h2>
@@ -43,6 +55,13 @@
 							<input type="hidden" name="addMember" value="{{member.name.email}}" />
 							<input type="hidden" name="setAdmin" value="True" />
 							<input type="submit" value="Promote to Admin" />
+						</form>
+					{% endifequal %}
+					{% ifequal member.status 2 %}
+						<form action="/groups/{{detail.group.key}}" method="post">
+							<input type="hidden" name="addMember" value="{{member.name.email}}" />
+							<input type="hidden" name="setMember" value="True" />
+							<input type="submit" value="Demote to User" />
 						</form>
 					{% endifequal %}
 				</td>
